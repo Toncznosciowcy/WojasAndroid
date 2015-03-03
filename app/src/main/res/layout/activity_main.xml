@@ -1,11 +1,60 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+<ScrollView
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <TableLayout
+        android:padding="@dimen/activity_main_margin"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TableRow
+            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp">
 
-</RelativeLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButtonOna"
+                android:src="@drawable/ona"
+                android:scaleType="fitXY"
+                android:layout_centerHorizontal="true"
+                android:adjustViewBounds="true"
+                android:cropToPadding="false"
+                android:onClick="submitCategory" />
+        </TableRow>
+
+        <TableRow
+            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButtonOn"
+                android:src="@drawable/on"
+                android:layout_centerHorizontal="true"
+                android:adjustViewBounds="true"
+                android:cropToPadding="false"
+                android:onClick="submitCategory" />
+        </TableRow>
+
+        <TableRow
+            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButtonOn2"
+                android:src="@drawable/on2"
+                android:layout_centerHorizontal="true"
+                android:adjustViewBounds="true"
+                android:cropToPadding="false"
+                android:onClick="submitCategory" />
+        </TableRow>
+    </TableLayout>
+</ScrollView>
