@@ -21,8 +21,7 @@
                 android:scaleType="fitXY"
                 android:layout_centerHorizontal="true"
                 android:adjustViewBounds="true"
-                android:cropToPadding="false"
-                android:onClick="submitCategory" />
+                android:cropToPadding="false" />
         </TableRow>
 
         <TableRow
@@ -37,8 +36,7 @@
                 android:src="@drawable/on"
                 android:layout_centerHorizontal="true"
                 android:adjustViewBounds="true"
-                android:cropToPadding="false"
-                android:onClick="submitCategory" />
+                android:cropToPadding="false" />
         </TableRow>
 
         <TableRow
@@ -53,8 +51,7 @@
                 android:src="@drawable/on2"
                 android:layout_centerHorizontal="true"
                 android:adjustViewBounds="true"
-                android:cropToPadding="false"
-                android:onClick="submitCategory" />
+                android:cropToPadding="false" />
         </TableRow>
     </TableLayout>
 </ScrollView>
