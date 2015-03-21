@@ -6,52 +6,9 @@
         android:padding="@dimen/activity_main_margin"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:id="@+id/mainActivity_tableLayout">
 
-        <TableRow
-            android:layout_weight="1"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp">
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButtonOna"
-                android:src="@drawable/ona"
-                android:scaleType="fitXY"
-                android:layout_centerHorizontal="true"
-                android:adjustViewBounds="true"
-                android:cropToPadding="false" />
-        </TableRow>
-
-        <TableRow
-            android:layout_weight="1"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButtonOn"
-                android:src="@drawable/on"
-                android:layout_centerHorizontal="true"
-                android:adjustViewBounds="true"
-                android:cropToPadding="false" />
-        </TableRow>
-
-        <TableRow
-            android:layout_weight="1"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButtonOn2"
-                android:src="@drawable/on2"
-                android:layout_centerHorizontal="true"
-                android:adjustViewBounds="true"
-                android:cropToPadding="false" />
-        </TableRow>
     </TableLayout>
 </ScrollView>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainCategory_row">
+
+    <LinearLayout android:orientation="horizontal"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:gravity="center"
+        android:weightSum="2">
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/mainCategory_imageBtn"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/mainCategory_text"/>
+    </LinearLayout>
+
+</TableRow>

@@ -8,4 +8,5 @@ public abstract class AbstractModel {
 
     public abstract String getCreateSQL();
     public abstract String getDropSQL ();
+    public abstract String getDataSQL ();
 }

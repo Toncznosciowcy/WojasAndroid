@@ -1,24 +1,46 @@
 package com.toncznosciowcy.wojas;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TableLayout;
+import android.widget.TextView;
+
+import com.toncznosciowcy.wojas.data.CategoryData;
+import com.toncznosciowcy.wojas.data.DatabaseHelper;
+
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    private String[] mainCategories = {"ONA", "ON", "ON2"};
+    LayoutInflater inflater = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
         setContentView(R.layout.activity_main);
-
+        List<CategoryData> categories = dbHelper.getRootCategories();
+        TableLayout container = (TableLayout) this.findViewById(R.id.mainActivity_tableLayout);
+        inflater= (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        for (CategoryData category : categories) {
+            View categoryItem = inflater.inflate(R.layout.item_main_category, null);
+            ImageButton categoryImageButton = (ImageButton) categoryItem.findViewById(R.id.mainCategory_imageBtn);
+            int imageResource = getResources().getIdentifier(category.getImage(), null, getPackageName());
+            categoryImageButton.setImageResource(imageResource);
+            TextView categoryText = (TextView) categoryItem.findViewById(R.id.mainCategory_text);
+            categoryText.setText(category.getName());
+            container.addView(categoryItem);
+        }
         Bundle parameters = new Bundle();
-        findViewById(R.id.imageButtonOn).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.mainCategory_row).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, Categories.class));
