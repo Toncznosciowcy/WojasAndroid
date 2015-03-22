@@ -2,6 +2,9 @@ package com.toncznosciowcy.wojas;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Picture;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PictureDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -34,7 +37,7 @@ public class MainActivity extends ActionBarActivity {
             View categoryItem = inflater.inflate(R.layout.item_main_category, null);
             ImageButton categoryImageButton = (ImageButton) categoryItem.findViewById(R.id.mainCategory_imageBtn);
             int imageResource = getResources().getIdentifier(category.getImage(), null, getPackageName());
-            categoryImageButton.setImageResource(imageResource);
+            categoryImageButton.setImageDrawable(getResources().getDrawable(imageResource));
             TextView categoryText = (TextView) categoryItem.findViewById(R.id.mainCategory_text);
             categoryText.setText(category.getName());
             container.addView(categoryItem);

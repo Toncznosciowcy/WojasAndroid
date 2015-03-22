@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String LOG = "DatabaseHelper";
 
     // Database Version
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
 
     // Database Name
     private static final String DATABASE_NAME = "wojas.db";
@@ -86,7 +86,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Log.i("DatabaseHelper", "All tables created SUCCESSFULLY");
             /*VALUES*/
             db.execSQL("INSERT INTO categories (cat_name, cat_id, cat_picture) VALUES " +
-                    "('Ona', 1, 'drawable/ona'), ('On', 2, 'drawable/on');");
+                    "('niej', 1, 'drawable/ona'), ('niego', 2, 'drawable/on');");
             db.execSQL("INSERT INTO categories (cat_name, cat_id) VALUES " +
                     /*"('Ona', 1 ), " +*/
                         "('Topy', 3 ), " +
@@ -103,12 +103,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                             "('W stylu causal', 22), ('Eleganckie', 23), ('Spodnie chinos', 24);");
             Log.i("DatabaseHelper", "Table Categories filled with data SUCCESSFULLY");
             db.execSQL("INSERT INTO categories_list (cli_fk_cat_id_from, cli_fk_cat_id_to) VALUES " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Ona'), (SELECT cat_id FROM categories WHERE cat_name='Topy')), " +
+                    "((SELECT cat_id FROM categories WHERE cat_name='niej'), (SELECT cat_id FROM categories WHERE cat_name='Topy')), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='Topy'), (SELECT cat_id FROM categories WHERE cat_name='Vests')), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='Topy'), (SELECT cat_id FROM categories WHERE cat_name='Krótki rękaw' AND cat_id=5)), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='Topy'), (SELECT cat_id FROM categories WHERE cat_name='Długi rękaw' AND cat_id=6)), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='Topy'), (SELECT cat_id FROM categories WHERE cat_name='Krótie topy')), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Ona'), (SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8)), " +
+                    "((SELECT cat_id FROM categories WHERE cat_name='niej'), (SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8)), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Rurki')), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Luźne')), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Spodnie chinos')), " +
@@ -116,12 +116,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Legginsy')), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Kombinezony')), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Joggersy')), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='On'), (SELECT cat_id FROM categories WHERE cat_name='Koszule')), " +
+                    "((SELECT cat_id FROM categories WHERE cat_name='niego'), (SELECT cat_id FROM categories WHERE cat_name='Koszule')), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='Koszule'), (SELECT cat_id FROM categories WHERE cat_name='W sytlu casual' AND cat_id=17)), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='W sytlu casual'), (SELECT cat_id FROM categories WHERE cat_name='Krótki rękaw' AND cat_id=18)), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='W sytlu casual'), (SELECT cat_id FROM categories WHERE cat_name='Długi rękaw' AND cat_id=19)), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='Koszule'), (SELECT cat_id FROM categories WHERE cat_name='Eleganckie' AND cat_id=20)), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='On'), (SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21)), " +
+                    "((SELECT cat_id FROM categories WHERE cat_name='niego'), (SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21)), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21), (SELECT cat_id FROM categories WHERE cat_name='W stylu causal' AND cat_id=22)), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21), (SELECT cat_id FROM categories WHERE cat_name='Eleganckie' AND cat_id=23)), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21), (SELECT cat_id FROM categories WHERE cat_name='Spodnie chinos' AND cat_id=24)), " +

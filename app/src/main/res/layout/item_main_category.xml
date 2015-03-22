@@ -3,27 +3,53 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mainCategory_row">
+    android:id="@+id/mainCategory_row"
+    android:paddingBottom="5dp">
 
     <LinearLayout android:orientation="horizontal"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
-        android:gravity="center"
         android:weightSum="2">
         <ImageButton
+            android:padding="0dp"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:id="@+id/mainCategory_imageBtn"
             android:scaleType="fitXY"
+            android:src="@drawable/on"
             android:adjustViewBounds="true"
             android:cropToPadding="false" />
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout android:orientation="vertical"
             android:layout_height="fill_parent"
-            android:gravity="center"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            android:id="@+id/mainCategory_text"/>
+            android:background="#ffd0a966"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="Kolekcja dla"
+                android:id="@+id/mainCategory_textPrefix"
+                android:elegantTextHeight="false"
+                android:enabled="false"
+                android:textColor="#ffffffff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:layout_weight="3"
+                android:text="Ona"
+                android:id="@+id/mainCategory_text"
+                android:elegantTextHeight="false"
+                android:enabled="false"
+                android:textColor="#ffffffff"
+                android:textSize="@dimen/abc_dropdownitem_icon_width" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </TableRow>
