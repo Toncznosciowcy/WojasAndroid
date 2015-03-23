@@ -151,6 +151,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count > 0;
     }
 
+    public Integer getParentId (Integer catId) {
+        String selectQuery = "SELECT cat_id FROM categories WHERE cat_id IN (SELECT cli_fk_cat_id_from FROM categories_list WHERE cli_fk_cat_id_to = " + catId + ")";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        cursor.moveToFirst();
+        return new Integer(cursor.getInt(0));
+    }
+
     public List<CategoryData> getAllCategories () {
         String selectQuery = "SELECT cat_id, cat_name, cat_picture FROM categories";
         SQLiteDatabase db = this.getWritableDatabase();
