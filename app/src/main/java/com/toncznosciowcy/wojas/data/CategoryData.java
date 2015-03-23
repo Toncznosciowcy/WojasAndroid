@@ -15,6 +15,7 @@ public class CategoryData {
     private String name; /*TODO: how to store multi language values?*/
     private boolean type;
     private String image;
+    private boolean hasSubCategories = false;
 
     private final String LOG_MESSAGE="CategoryData";
 
@@ -84,5 +85,13 @@ public class CategoryData {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public boolean hasSubCategories() {
+        return hasSubCategories;
+    }
+
+    public void setHasSubCategories(boolean hasSubCategories) {
+        this.hasSubCategories = hasSubCategories;
     }
 }

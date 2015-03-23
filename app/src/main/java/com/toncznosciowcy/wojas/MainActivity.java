@@ -2,9 +2,6 @@ package com.toncznosciowcy.wojas;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Picture;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.PictureDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.toncznosciowcy.wojas.data.CategoryData;
@@ -25,6 +23,18 @@ public class MainActivity extends ActionBarActivity {
 
     LayoutInflater inflater = null;
 
+    private View.OnClickListener onMainCategoryClick = new View.OnClickListener() {
+        @Override
+        public void onClick (View view){
+            Intent intent = new Intent(MainActivity.this, Categories.class);
+            Bundle b = new Bundle();
+            b.putInt("categoryId", view.getId());
+            intent.putExtras(b);
+            startActivity(intent);
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,21 +44,18 @@ public class MainActivity extends ActionBarActivity {
         TableLayout container = (TableLayout) this.findViewById(R.id.mainActivity_tableLayout);
         inflater= (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         for (CategoryData category : categories) {
-            View categoryItem = inflater.inflate(R.layout.item_main_category, null);
-            ImageButton categoryImageButton = (ImageButton) categoryItem.findViewById(R.id.mainCategory_imageBtn);
+            View mainCategoryItem = inflater.inflate(R.layout.item_main_category, null);
+            TableRow tableRow = (TableRow) mainCategoryItem.findViewById(R.id.mainCategory_row);
+            tableRow.setId(category.getId());
+            mainCategoryItem.setOnClickListener(onMainCategoryClick);
+            ImageButton categoryImageButton = (ImageButton) mainCategoryItem.findViewById(R.id.mainCategory_imageBtn);
             int imageResource = getResources().getIdentifier(category.getImage(), null, getPackageName());
             categoryImageButton.setImageDrawable(getResources().getDrawable(imageResource));
-            TextView categoryText = (TextView) categoryItem.findViewById(R.id.mainCategory_text);
+            TextView categoryText = (TextView) mainCategoryItem.findViewById(R.id.mainCategory_text);
             categoryText.setText(category.getName());
-            container.addView(categoryItem);
+            container.addView(mainCategoryItem);
         }
         Bundle parameters = new Bundle();
-        findViewById(R.id.mainCategory_row).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Categories.class));
-            }
-        });
     }
 
     @Override

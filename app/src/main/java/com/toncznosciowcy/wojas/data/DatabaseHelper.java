@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String LOG = "DatabaseHelper";
 
     // Database Version
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 10;
 
     // Database Name
     private static final String DATABASE_NAME = "wojas.db";
@@ -124,8 +124,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "((SELECT cat_id FROM categories WHERE cat_name='niego'), (SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21)), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21), (SELECT cat_id FROM categories WHERE cat_name='W stylu causal' AND cat_id=22)), " +
                     "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21), (SELECT cat_id FROM categories WHERE cat_name='Eleganckie' AND cat_id=23)), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21), (SELECT cat_id FROM categories WHERE cat_name='Spodnie chinos' AND cat_id=24)), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Topy'), (SELECT cat_id FROM categories WHERE cat_name='Topy'));");
+                    "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21), (SELECT cat_id FROM categories WHERE cat_name='Spodnie chinos' AND cat_id=24));");
             Log.i("DatabaseHelper", "Table categories_list filled with data SUCCESSFULLY");
     }
 
@@ -143,6 +142,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return getCategories(cursor);
     }
 
+    public boolean hasSubCategories (Integer catId) {
+        String selectQuery = "SELECT COUNT (cli_fk_cat_id_from) FROM categories_list WHERE cli_fk_cat_id_from=" +catId;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0);
+        return count > 0;
+    }
+
     public List<CategoryData> getAllCategories () {
         String selectQuery = "SELECT cat_id, cat_name, cat_picture FROM categories";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -156,7 +164,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 CategoryData category = new CategoryData();
-                category.setId(Integer.getInteger(cursor.getString(0)));
+                category.setId(Integer.parseInt(cursor.getString(0)));
                 category.setName(cursor.getString(1));
                 category.setImage(cursor.getString(2));
                 categories.add(category);

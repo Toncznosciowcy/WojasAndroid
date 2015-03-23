@@ -6,12 +6,19 @@
 
     <ImageButton
         android:layout_weight="1"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent" />
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:id="@+id/itemCategory_image"
+        android:src="@drawable/on2"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"/>
 
     <TextView
         android:layout_weight="5"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent" />
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:id="@+id/itemCategory_textCategory"
+        android:text="@string/itemCategory_testText"
+        android:gravity="center" />
 
 </LinearLayout>
