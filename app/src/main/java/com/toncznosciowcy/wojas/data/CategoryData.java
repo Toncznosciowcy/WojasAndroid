@@ -12,10 +12,12 @@ import com.toncznosciowcy.wojas.data.model.CategoryModel;
  */
 public class CategoryData {
     private Integer id;
+    private String prefixName;
     private String name; /*TODO: how to store multi language values?*/
     private boolean type;
     private String image;
     private boolean hasSubCategories = false;
+
 
     private final String LOG_MESSAGE="CategoryData";
 
@@ -50,6 +52,14 @@ public class CategoryData {
 
     public CategoryData(Integer id, String name, boolean type, String image) {
         this.id = id;
+        this.name = name;
+        this.type = type;
+        this.image = image;
+    }
+
+    public CategoryData(Integer id, String name, boolean type, String image, String prefixName) {
+        this.id = id;
+        this.prefixName = prefixName;
         this.name = name;
         this.type = type;
         this.image = image;
@@ -93,5 +103,13 @@ public class CategoryData {
 
     public void setHasSubCategories(boolean hasSubCategories) {
         this.hasSubCategories = hasSubCategories;
+    }
+
+    public String getPrefixName() {
+        return prefixName;
+    }
+
+    public void setPrefixName(String prefixName) {
+        this.prefixName = prefixName;
     }
 }

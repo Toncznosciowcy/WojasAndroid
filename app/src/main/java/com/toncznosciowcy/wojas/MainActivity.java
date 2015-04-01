@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 
 import com.toncznosciowcy.wojas.data.CategoryData;
 import com.toncznosciowcy.wojas.data.DatabaseHelper;
+import com.toncznosciowcy.wojas.data.MainCategoriesAdapter;
 
 import java.util.List;
 
@@ -23,15 +27,16 @@ public class MainActivity extends ActionBarActivity {
 
     LayoutInflater inflater = null;
 
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mainCategoriesAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
     private View.OnClickListener onMainCategoryClick = new View.OnClickListener() {
         @Override
         public void onClick (View view){
             Intent intent = new Intent(MainActivity.this, Categories.class);
-            Bundle b = new Bundle();
-            b.putInt("categoryId", view.getId());
-            intent.putExtras(b);
-            startActivity(intent);
 
+            startActivity(intent);
         }
     };
 
@@ -40,21 +45,16 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
         setContentView(R.layout.activity_main);
+
         List<CategoryData> categories = dbHelper.getRootCategories();
-        TableLayout container = (TableLayout) this.findViewById(R.id.mainActivity_tableLayout);
-        inflater= (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        for (CategoryData category : categories) {
-            View mainCategoryItem = inflater.inflate(R.layout.item_main_category, null);
-            TableRow tableRow = (TableRow) mainCategoryItem.findViewById(R.id.mainCategory_row);
-            tableRow.setId(category.getId());
-            mainCategoryItem.setOnClickListener(onMainCategoryClick);
-            ImageButton categoryImageButton = (ImageButton) mainCategoryItem.findViewById(R.id.mainCategory_imageBtn);
-            int imageResource = getResources().getIdentifier(category.getImage(), null, getPackageName());
-            categoryImageButton.setImageDrawable(getResources().getDrawable(imageResource));
-            TextView categoryText = (TextView) mainCategoryItem.findViewById(R.id.mainCategory_text);
-            categoryText.setText(category.getName());
-            container.addView(mainCategoryItem);
-        }
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mainCategoriesAdapter = new MainCategoriesAdapter(categories, this, onMainCategoryClick);
+        mRecyclerView.setAdapter(mainCategoriesAdapter);
+
         Bundle parameters = new Bundle();
     }
 

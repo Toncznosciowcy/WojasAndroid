@@ -74,7 +74,7 @@ public class Categories extends ActionBarActivity {
                 //TODO: add icon
             }
             categoryItem.setOnClickListener(onCategoryClick);
-            container.addView(categoryItem);
+            //container.addView(categoryItem);
         }
     }
 

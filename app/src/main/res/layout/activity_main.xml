@@ -1,8 +1,3 @@
-<ScrollView
-    android:layout_height="wrap_content"
-    android:layout_width="fill_parent"
-    android:padding="@dimen/mainPadding"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
     <TableLayout
         android:padding="@dimen/activity_main_margin"
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -10,7 +5,11 @@
         android:layout_height="fill_parent"
         android:id="@+id/mainActivity_tableLayout"
         android:paddingRight="0dp">
-
-
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/my_recycler_view"
+                android:scrollbars="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                xmlns:android="http://schemas.android.com/apk/res/android" >
+        </android.support.v7.widget.RecyclerView>
     </TableLayout>
-</ScrollView>
