@@ -31,15 +31,6 @@ public class MainActivity extends ActionBarActivity {
     private RecyclerView.Adapter mainCategoriesAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private View.OnClickListener onMainCategoryClick = new View.OnClickListener() {
-        @Override
-        public void onClick (View view){
-            Intent intent = new Intent(MainActivity.this, Categories.class);
-
-            startActivity(intent);
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mainCategoriesAdapter = new MainCategoriesAdapter(categories, this, onMainCategoryClick);
+        mainCategoriesAdapter = new MainCategoriesAdapter(categories, this);
         mRecyclerView.setAdapter(mainCategoriesAdapter);
 
         Bundle parameters = new Bundle();
