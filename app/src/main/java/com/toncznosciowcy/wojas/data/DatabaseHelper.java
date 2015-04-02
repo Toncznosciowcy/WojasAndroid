@@ -29,105 +29,105 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-        private CategoryModel categoryModel = new CategoryModel();
+    private CategoryModel categoryModel = new CategoryModel();
 
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            // creating required tables
-            db.execSQL(
-            "CREATE TABLE categories (\n" +
-                    "    cat_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
-                    "    cat_name TEXT NOT NULL,\n" +
-                    "    cat_picture TEXT\n" +
-                    ");" );
-            db.execSQL("CREATE TABLE categories_list (\n" +
-                            "    cli_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
-                            "    cli_fk_cat_id_from INTEGER NOT NULL,\n" +
-                            "    cli_fk_cat_id_to  INTEGER NOT NULL,\n" +
-                            "    FOREIGN KEY(cli_fk_cat_id_from) REFERENCES categories(cat_id),\n" +
-                            "    FOREIGN KEY(cli_fk_cat_id_to) REFERENCES categories(cat_id)\n" +
-                            ");");
-            db.execSQL(
-            "CREATE TABLE colors (\n" +
-                "    col_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
-                "    col_name TEXT NOT NULL\n" +
-                ");\n" +
-            "CREATE TABLE pictures (\n" +
-                "    pic_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
-                "    pic_blob BLOB NOT NULL\n" +
-                ");\n" +
-            "CREATE TABLE sizes (\n" +
-                "    siz_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
-                "    siz_name TEXT NOT NULL\n" +
-                ");\n" +
-            "CREATE TABLE colors_pictures (\n" +
-                "    cop_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
-                "    cop_fk_pic_id INTEGER NOT NULL,\n" +
-                "    cop_fk_col_id INTEGER NOT NULL,\n" +
-                "    FOREIGN KEY(cop_fk_pic_id) REFERENCES pictures(pic_id),\n" +
-                "    FOREIGN KEY(cop_fk_col_id) REFERENCES colors(col_id)\n" +
-                ");\n" +
-            "CREATE TABLE products (\n" +
-                "    prd_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
-                "    prd_fk_cat_id INTEGER NOT NULL,\n" +
-                "    prd_fk_size_id  INTEGER NOT NULL,\n" +
-                "    prd_name TEXT NOT NULL,\n" +
-                "    prd_value INTEGER NOT NULL,\n" +
-                "    FOREIGN KEY(prd_fk_cat_id) REFERENCES categories(cat_id),\n" +
-                "    FOREIGN KEY(prd_fk_size_id) REFERENCES sizes(siz_id)\n" +
-                ");\n" +
-            "CREATE TABLE products_colors (\n" +
-                "    prc_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
-                "    prc_fk_prd_id INTEGER NOT NULL,\n" +
-                "    prc_fk_col_id INTEGER NOT NULL,\n" +
-                "    FOREIGN KEY(prc_fk_prd_id) REFERENCES products(prd_id),\n" +
-                "    FOREIGN KEY(prc_fk_col_id) REFERENCES colors(col_id)\n" +
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        // creating required tables
+        db.execSQL(
+                "CREATE TABLE categories (\n" +
+                        "    cat_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
+                        "    cat_name TEXT NOT NULL,\n" +
+                        "    cat_picture TEXT\n" +
+                        ");" );
+        db.execSQL("CREATE TABLE categories_list (\n" +
+                "    cli_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
+                "    cli_fk_cat_id_from INTEGER NOT NULL,\n" +
+                "    cli_fk_cat_id_to  INTEGER NOT NULL,\n" +
+                "    FOREIGN KEY(cli_fk_cat_id_from) REFERENCES categories(cat_id),\n" +
+                "    FOREIGN KEY(cli_fk_cat_id_to) REFERENCES categories(cat_id)\n" +
                 ");");
-            Log.i("DatabaseHelper", "All tables created SUCCESSFULLY");
+        db.execSQL(
+                "CREATE TABLE colors (\n" +
+                        "    col_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
+                        "    col_name TEXT NOT NULL\n" +
+                        ");\n" +
+                        "CREATE TABLE pictures (\n" +
+                        "    pic_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
+                        "    pic_blob BLOB NOT NULL\n" +
+                        ");\n" +
+                        "CREATE TABLE sizes (\n" +
+                        "    siz_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
+                        "    siz_name TEXT NOT NULL\n" +
+                        ");\n" +
+                        "CREATE TABLE colors_pictures (\n" +
+                        "    cop_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
+                        "    cop_fk_pic_id INTEGER NOT NULL,\n" +
+                        "    cop_fk_col_id INTEGER NOT NULL,\n" +
+                        "    FOREIGN KEY(cop_fk_pic_id) REFERENCES pictures(pic_id),\n" +
+                        "    FOREIGN KEY(cop_fk_col_id) REFERENCES colors(col_id)\n" +
+                        ");\n" +
+                        "CREATE TABLE products (\n" +
+                        "    prd_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
+                        "    prd_fk_cat_id INTEGER NOT NULL,\n" +
+                        "    prd_fk_size_id  INTEGER NOT NULL,\n" +
+                        "    prd_name TEXT NOT NULL,\n" +
+                        "    prd_value INTEGER NOT NULL,\n" +
+                        "    FOREIGN KEY(prd_fk_cat_id) REFERENCES categories(cat_id),\n" +
+                        "    FOREIGN KEY(prd_fk_size_id) REFERENCES sizes(siz_id)\n" +
+                        ");\n" +
+                        "CREATE TABLE products_colors (\n" +
+                        "    prc_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
+                        "    prc_fk_prd_id INTEGER NOT NULL,\n" +
+                        "    prc_fk_col_id INTEGER NOT NULL,\n" +
+                        "    FOREIGN KEY(prc_fk_prd_id) REFERENCES products(prd_id),\n" +
+                        "    FOREIGN KEY(prc_fk_col_id) REFERENCES colors(col_id)\n" +
+                        ");");
+        Log.i("DatabaseHelper", "All tables created SUCCESSFULLY");
             /*VALUES*/
-            db.execSQL("INSERT INTO categories (cat_name, cat_id, cat_picture) VALUES " +
-                    "('niej', 1, 'drawable/ona'), ('niego', 2, 'drawable/on');");
-            db.execSQL("INSERT INTO categories (cat_name, cat_id) VALUES " +
+        db.execSQL("INSERT INTO categories (cat_name, cat_id, cat_picture) VALUES " +
+                "('niej', 1, 'drawable/ona'), ('niego', 2, 'drawable/on');");
+        db.execSQL("INSERT INTO categories (cat_name, cat_id) VALUES " +
                     /*"('Ona', 1 ), " +*/
-                        "('Topy', 3 ), " +
-                            "('Vests', 4 ), ( 'Krótki rękaw', 5 ), ( 'Długi rękaw', 6 ), ( 'Krótie topy', 7 ), " +
-                        "('Spodnie', 8), " +
-                            "('Rurki', 9), ('Luźne', 10), ('Spodnie chinos', 11), ('Eleganckie', 12), ('Legginsy', 13), ('Kombinezony', 14), ('Joggersy', 15), " +
+                "('Topy', 3 ), " +
+                "('Vests', 4 ), ( 'Krótki rękaw', 5 ), ( 'Długi rękaw', 6 ), ( 'Krótie topy', 7 ), " +
+                "('Spodnie', 8), " +
+                "('Rurki', 9), ('Luźne', 10), ('Spodnie chinos', 11), ('Eleganckie', 12), ('Legginsy', 13), ('Kombinezony', 14), ('Joggersy', 15), " +
                     /*ON*/
                     /*"('On', 2), " +*/
-                        "('Koszule', 16), " +
-                            "('W sytlu casual', 17), " +
-                                            "('Krótki rękaw', 18), ('Długi rękaw', 19), " +
-                            "('Eleganckie', 20), " +
-                        "('Spodnie', 21), " +
-                            "('W stylu causal', 22), ('Eleganckie', 23), ('Spodnie chinos', 24);");
-            Log.i("DatabaseHelper", "Table Categories filled with data SUCCESSFULLY");
-            db.execSQL("INSERT INTO categories_list (cli_fk_cat_id_from, cli_fk_cat_id_to) VALUES " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='niej'), (SELECT cat_id FROM categories WHERE cat_name='Topy')), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Topy'), (SELECT cat_id FROM categories WHERE cat_name='Vests')), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Topy'), (SELECT cat_id FROM categories WHERE cat_name='Krótki rękaw' AND cat_id=5)), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Topy'), (SELECT cat_id FROM categories WHERE cat_name='Długi rękaw' AND cat_id=6)), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Topy'), (SELECT cat_id FROM categories WHERE cat_name='Krótie topy')), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='niej'), (SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8)), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Rurki')), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Luźne')), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Spodnie chinos')), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Eleganckie')), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Legginsy')), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Kombinezony')), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Joggersy')), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='niego'), (SELECT cat_id FROM categories WHERE cat_name='Koszule')), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Koszule'), (SELECT cat_id FROM categories WHERE cat_name='W sytlu casual' AND cat_id=17)), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='W sytlu casual'), (SELECT cat_id FROM categories WHERE cat_name='Krótki rękaw' AND cat_id=18)), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='W sytlu casual'), (SELECT cat_id FROM categories WHERE cat_name='Długi rękaw' AND cat_id=19)), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Koszule'), (SELECT cat_id FROM categories WHERE cat_name='Eleganckie' AND cat_id=20)), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='niego'), (SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21)), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21), (SELECT cat_id FROM categories WHERE cat_name='W stylu causal' AND cat_id=22)), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21), (SELECT cat_id FROM categories WHERE cat_name='Eleganckie' AND cat_id=23)), " +
-                    "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21), (SELECT cat_id FROM categories WHERE cat_name='Spodnie chinos' AND cat_id=24));");
-            Log.i("DatabaseHelper", "Table categories_list filled with data SUCCESSFULLY");
+                "('Koszule', 16), " +
+                "('W sytlu casual', 17), " +
+                "('Krótki rękaw', 18), ('Długi rękaw', 19), " +
+                "('Eleganckie', 20), " +
+                "('Spodnie', 21), " +
+                "('W stylu causal', 22), ('Eleganckie', 23), ('Spodnie chinos', 24);");
+        Log.i("DatabaseHelper", "Table Categories filled with data SUCCESSFULLY");
+        db.execSQL("INSERT INTO categories_list (cli_fk_cat_id_from, cli_fk_cat_id_to) VALUES " +
+                "((SELECT cat_id FROM categories WHERE cat_name='niej'), (SELECT cat_id FROM categories WHERE cat_name='Topy')), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='Topy'), (SELECT cat_id FROM categories WHERE cat_name='Vests')), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='Topy'), (SELECT cat_id FROM categories WHERE cat_name='Krótki rękaw' AND cat_id=5)), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='Topy'), (SELECT cat_id FROM categories WHERE cat_name='Długi rękaw' AND cat_id=6)), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='Topy'), (SELECT cat_id FROM categories WHERE cat_name='Krótie topy')), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='niej'), (SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8)), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Rurki')), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Luźne')), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Spodnie chinos')), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Eleganckie')), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Legginsy')), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Kombinezony')), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=8), (SELECT cat_id FROM categories WHERE cat_name='Joggersy')), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='niego'), (SELECT cat_id FROM categories WHERE cat_name='Koszule')), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='Koszule'), (SELECT cat_id FROM categories WHERE cat_name='W sytlu casual' AND cat_id=17)), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='W sytlu casual'), (SELECT cat_id FROM categories WHERE cat_name='Krótki rękaw' AND cat_id=18)), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='W sytlu casual'), (SELECT cat_id FROM categories WHERE cat_name='Długi rękaw' AND cat_id=19)), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='Koszule'), (SELECT cat_id FROM categories WHERE cat_name='Eleganckie' AND cat_id=20)), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='niego'), (SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21)), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21), (SELECT cat_id FROM categories WHERE cat_name='W stylu causal' AND cat_id=22)), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21), (SELECT cat_id FROM categories WHERE cat_name='Eleganckie' AND cat_id=23)), " +
+                "((SELECT cat_id FROM categories WHERE cat_name='Spodnie' AND cat_id=21), (SELECT cat_id FROM categories WHERE cat_name='Spodnie chinos' AND cat_id=24));");
+        Log.i("DatabaseHelper", "Table categories_list filled with data SUCCESSFULLY");
     }
-
+    /*TODO: add logs how many records returned*/
     public List<CategoryData> getRootCategories () {
         String selectQuery = "SELECT cat_id, cat_name, cat_picture FROM categories WHERE (SELECT COUNT (cli_fk_cat_id_to) FROM categories_list WHERE cli_fk_cat_id_to=cat_id ) = 0";
         SQLiteDatabase db = this.getWritableDatabase();

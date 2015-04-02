@@ -1,7 +1,5 @@
 package com.toncznosciowcy.wojas;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -10,11 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import com.toncznosciowcy.wojas.data.CategoryData;
 import com.toncznosciowcy.wojas.data.DatabaseHelper;
@@ -29,7 +22,6 @@ public class MainActivity extends ActionBarActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mainCategoriesAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +31,7 @@ public class MainActivity extends ActionBarActivity {
 
         List<CategoryData> categories = dbHelper.getRootCategories();
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView = (RecyclerView) findViewById(R.id.main_activity_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());

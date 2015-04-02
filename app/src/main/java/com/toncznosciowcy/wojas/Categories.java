@@ -1,26 +1,25 @@
 package com.toncznosciowcy.wojas;
 
-import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.toncznosciowcy.wojas.data.CategoryData;
+import com.toncznosciowcy.wojas.data.CategoriesAdapter;
 import com.toncznosciowcy.wojas.data.DatabaseHelper;
 
-import java.util.List;
 
-
-public class Categories extends ActionBarActivity {
+public class Categories extends ActionBarActivity implements CategoriesAdapter.CategoryClickListener {
 
     private String categoryType;
     private Integer categoryId;
+
+    private RecyclerView recyclerView;
+    private CategoriesAdapter categoriesAdapter;
+    private DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +27,14 @@ public class Categories extends ActionBarActivity {
         setContentView(R.layout.activity_categories);
         Bundle b = getIntent().getExtras();
         categoryId = b.getInt("categoryId");
-        reloadCategories();
+        dbHelper = new DatabaseHelper(getApplicationContext());
+        recyclerView = (RecyclerView) findViewById(R.id.category_activity_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        categoriesAdapter = new CategoriesAdapter(dbHelper.getSubCategories(categoryId), this);
+        categoriesAdapter.setCategoryClickListener(this);
+        recyclerView.setAdapter(categoriesAdapter);
     }
 
     @Override
@@ -53,40 +59,6 @@ public class Categories extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void reloadCategories () {
-        LinearLayout container = (LinearLayout) this.findViewById(R.id.activityCategories_container);
-        container.removeAllViews();
-        DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
-        List<CategoryData> categories = dbHelper.getSubCategories(categoryId);
-        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        for (CategoryData category : categories) {
-            View categoryItem = inflater.inflate(R.layout.item_category, null);
-            categoryItem.setId(category.getId());
-            if (category.getImage() != null && !category.getImage().isEmpty()) {
-                ImageButton categoryImageButton = (ImageButton) categoryItem.findViewById(R.id.itemCategory_image);
-                int imageResource = getResources().getIdentifier(category.getImage(), null, getPackageName());
-                categoryImageButton.setImageDrawable(getResources().getDrawable(imageResource));
-            }
-            TextView categoryText = (TextView) categoryItem.findViewById(R.id.itemCategory_textCategory);
-            categoryText.setText(category.getName());
-            category.setHasSubCategories(dbHelper.hasSubCategories(category.getId()));
-            if (category.hasSubCategories()) {
-                //TODO: add icon
-            }
-            categoryItem.setOnClickListener(onCategoryClick);
-            //container.addView(categoryItem);
-        }
-    }
-
-    private View.OnClickListener onCategoryClick = new View.OnClickListener() {
-        //TODO: transitions? maybe use another component, ex. collectionView
-        @Override
-        public void onClick (View view){
-            setCategoryId(view.getId());
-            reloadCategories();
-        }
-    };
-
     public String getCategoryType() {
         return categoryType;
     }
@@ -101,5 +73,13 @@ public class Categories extends ActionBarActivity {
 
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
+    }
+
+    @Override
+    public void categoryClicked(Integer catId) {
+        //categoriesAdapter = new CategoriesAdapter(dbHelper.getSubCategories(catId), this);
+        //recyclerView.swapAdapter(categoriesAdapter, false);
+        categoriesAdapter.setCategoriesList(dbHelper.getSubCategories(catId));
+        categoriesAdapter.notifyDataSetChanged();
     }
 }
